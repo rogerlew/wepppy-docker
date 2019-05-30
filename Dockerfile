@@ -94,7 +94,7 @@ RUN apt-get install nano
 WORKDIR /workdir
 
 # Copy the current directory contents into the container at /app
-RUN git clone -b master https://github.com/rogerlew/wepppy.git
+RUN git clone https://github.com/rogerlew/wepppy.git
 
 WORKDIR /workdir/wepppy
 
