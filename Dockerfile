@@ -106,6 +106,7 @@ RUN rm wepppy/soils/ssurgo/data/surgo/surgo_tabular.db
 RUN git lfs pull
 
 RUN cp -R wepppy /usr/lib/python3/dist-packages/
+RUN rm -R wepppy
 
 VOLUME /geodata
 
