@@ -90,11 +90,13 @@ RUN pip3 install utm==0.4.2
 RUN pip3 install what3words
 
 RUN apt-get install nano
+RUN apt-get install curl
+RUN apt-get install wget
 
 WORKDIR /workdir
 
 # Copy the current directory contents into the container at /app
-RUN git clone https://github.com/rogerlew/wepppy.git
+RUN git clone -b master https://github.com/rogerlew/wepppy.git
 
 WORKDIR /workdir/wepppy
 
@@ -105,17 +107,21 @@ RUN rm wepppy/soils/ssurgo/data/statsgo/statsgo_tabular.db
 RUN rm wepppy/soils/ssurgo/data/surgo/surgo_tabular.db
 RUN git lfs pull
 
-RUN cp -R wepppy /usr/lib/python3/dist-packages/
-RUN rm -R wepppy
+# RUN cp -R wepppy /usr/lib/python3/dist-packages/
+
+ENV PYTHONPATH=/workdir/wepppy/wepppy
 
 VOLUME /geodata
+VOLUME /workdir/wepppy/wepppy
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
 # Run app.py when the container launches
-CMD ["python3", "/usr/lib/python3/dist-packages/wepppy/weppcloud/app.py"]
+CMD ["python3", "/workdir/wepppy/wepppy/weppcloud/app.py"]
 
+# sudo docker run -i -t wepppydocker /bin/bash
+# sudo docker run -i -p 5000:80 -v geodata:/geodata -t wepppydocker
 #
 # To build image
 # > sudo docker build --tag=wepppydocker .
