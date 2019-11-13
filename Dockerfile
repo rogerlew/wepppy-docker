@@ -74,7 +74,7 @@ RUN pip3 install psycopg2==2.7.4
 RUN pip3 install pycparser==2.18
 RUN pip3 install pygdaltools==1.1
 RUN pip3 install pyparsing==2.2.0
-RUN pip3 install pyproj==1.9.6
+RUN pip3 install pyproj==2.3.1
 RUN pip3 install python-dateutil==2.7.2
 RUN pip3 install pytz==2018.3
 RUN pip3 install PyYAML==3.11
